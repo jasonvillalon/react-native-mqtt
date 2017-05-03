@@ -289,28 +289,38 @@ public class RCTMqtt implements MqttCallback{
 	  }
 	}
 
-	public void unsubscribe(final String topic) {
+	// public void unsubscribe(final String topic) {
+	// 	try {
+	//     IMqttToken subToken = client.unsubscribe(topic);
+	//     subToken.setActionCallback(new IMqttActionListener() {
+	//         @Override
+	//         public void onSuccess(IMqttToken asyncActionToken) {
+	//             // The message was published
+	//           log("Subscribe success");
+	//         }
+	//
+	//         @Override
+	//         public void onFailure(IMqttToken asyncActionToken,
+	//                               Throwable exception) {
+	//             // The subscription could not be performed, maybe the user was not
+	//             // authorized to subscribe on the specified topic e.g. using wildcards
+	//
+	//           log("Subscribe failed");
+	//         }
+	//     });
+	//   } catch (MqttException e) {
+	//     log("Cann't subscribe");
+	//     e.printStackTrace();
+	//   }
+	// }
+
+	public boolean isConnected() {
 		try {
-	    IMqttToken subToken = client.unsubscribe(topic);
-	    subToken.setActionCallback(new IMqttActionListener() {
-	        @Override
-	        public void onSuccess(IMqttToken asyncActionToken) {
-	            // The message was published
-	          log("Subscribe success");
-	        }
-
-	        @Override
-	        public void onFailure(IMqttToken asyncActionToken,
-	                              Throwable exception) {
-	            // The subscription could not be performed, maybe the user was not
-	            // authorized to subscribe on the specified topic e.g. using wildcards
-
-	          log("Subscribe failed");
-	        }
-	    });
-	  } catch (MqttException e) {
-	    log("Cann't subscribe");
-	    e.printStackTrace();
+	    	return client.isConnected();
+	  } catch (Exception e) {
+	    	log("Cann't check is connected");
+	    	e.printStackTrace();
+				return false;
 	  }
 	}
 

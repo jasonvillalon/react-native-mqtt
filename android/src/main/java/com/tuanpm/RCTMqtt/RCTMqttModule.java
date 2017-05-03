@@ -68,23 +68,33 @@ public class RCTMqttModule extends ReactContextBaseJavaModule {
     public void connect(final int clientRef) {
       clients.get(clientRef).connect();
     }
-    
+
     @ReactMethod
     public void disconnect(final int clientRef) {
       clients.get(clientRef).disconnect();
     }
-    
+
 
     @ReactMethod
     public void subscribe(final int clientRef, final String topic, final int qos) {
       clients.get(clientRef).subscribe(topic, qos);
     }
 
+    // @ReactMethod
+    // public void unsubscribe(final int clientRef, final String topic) {
+    //   clients.get(clientRef).unsubscribe(topic);
+    // }
+
     @ReactMethod
     public void publish(final int clientRef, final String topic, final String payload, final int qos, final boolean retain) {
       clients.get(clientRef).publish(topic, payload, qos, retain);
     }
-    
+
+    @ReactMethod
+    public void isConnected(final int clientRef, Promise promise) {
+      promise.resolve(clients.get(clientRef).isConnected());
+    }
+
     public static int randInt(int min, int max) {
 
         // NOTE: This will (intentionally) not run as written so that folks

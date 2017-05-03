@@ -38,8 +38,12 @@ MqttClient.prototype.subscribe = function (topic, qos) {
 	Mqtt.subscribe(this.clientRef, topic, qos);
 }
 
-MqttClient.prototype.unsubscribe = function (topic) {
-	Mqtt.unsubscribe(this.clientRef, topic);
+// MqttClient.prototype.unsubscribe = function (topic) {
+// 	Mqtt.unsubscribe(this.clientRef, topic);
+// }
+
+MqttClient.prototype.isConnected = async  function () {
+	return await Mqtt.isConnected(this.clientRef);
 }
 
 MqttClient.prototype.publish = function(topic, payload, qos, retain) {
